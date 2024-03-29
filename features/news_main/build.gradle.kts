@@ -57,4 +57,5 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.44")
 
     implementation(project(":news-data"))
+    implementation("jakarta.inject:jakarta.inject-api:2.0.1")
 }
