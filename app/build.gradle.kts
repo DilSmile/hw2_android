@@ -61,4 +61,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation ("com.google.dagger:dagger:2.x")
+    implementation("com.google.dagger:hilt-android:2.44")
+    implementation("jakarta.inject:jakarta.inject-api:2.0.1")
 }
