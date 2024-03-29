@@ -38,4 +38,5 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
     implementation(project(":database"))
     implementation(project(":newsapi"))
+    implementation("jakarta.inject:jakarta.inject-api:2.0.1")
 }

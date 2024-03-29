@@ -2,19 +2,16 @@ package com.example.news_main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.news_data.ArticlesRepository
 import com.example.news_data.RequestResult
-import com.example.news_data.map
+import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import jakarta.inject.Provider
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
-
+@HiltViewModel
 internal class NewsMainViewModel @Inject constructor (
     getAllArticlesUseCase: Provider<GetAllArticlesUseCase>,
 ):ViewModel(){

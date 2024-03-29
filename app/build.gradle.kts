@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -18,6 +20,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField("String","NEWS_API_KEY","\"\"")
+        buildConfigField("String","NEWS_API_BASE_URL","\"\"")
+
     }
 
     buildTypes {
@@ -47,6 +52,9 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -64,4 +72,9 @@ dependencies {
     implementation ("com.google.dagger:dagger:2.x")
     implementation("com.google.dagger:hilt-android:2.44")
     implementation("jakarta.inject:jakarta.inject-api:2.0.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    implementation(project(":news-data"))
+    implementation(project(":newsapi"))
+    implementation(project(":database"))
 }
