@@ -53,6 +53,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    implementation ("com.google.dagger:dagger:2.x")
+    implementation("com.google.dagger:hilt-android:2.44")
 
     implementation(project(":news-data"))
 }
