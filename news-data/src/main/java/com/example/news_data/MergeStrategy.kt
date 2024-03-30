@@ -17,7 +17,9 @@ internal class RequestResponseMergeStrategy<T:Any>:MergeStrategy<RequestResult<T
                 merge(right, left)
             right is RequestResult.Success && left is RequestResult.Error ->
                 merge(right, left)
-            else -> error("Unimplemented branch")
+            right is RequestResult.InProgress && left is RequestResult.Error ->
+                merge(right, left)
+            else -> error("Unimplemented branch right= $right & left=$left")
         }
     }
     private fun merge(
@@ -29,22 +31,38 @@ internal class RequestResponseMergeStrategy<T:Any>:MergeStrategy<RequestResult<T
             else -> RequestResult.InProgress(cache.data)
         }
     }
+    @Suppress("UNUSED_PARAMETOR")
     private fun merge(
         cache: RequestResult.Success<T>,
         server: RequestResult.InProgress<T>
     ):RequestResult<T>{
         return  RequestResult.InProgress(cache.data)
     }
+    @Suppress("UNUSED_PARAMETOR")
     private fun merge(
         cache: RequestResult.InProgress<T>,
         server: RequestResult.Success<T>
     ):RequestResult<T>{
         return  RequestResult.InProgress(server.data)
     }
+    @Suppress("UNUSED_PARAMETOR")
     private fun merge(
         cache: RequestResult.Success<T>,
         server: RequestResult.Error<T>
     ):RequestResult<T>{
         return  RequestResult.Error( data=cache.data,error = server.error)
+    }
+    @Suppress("UNUSED_PARAMETOR")
+    private fun merge(
+        cache: RequestResult.Success<T>,
+        server: RequestResult.Success<T>
+    ):RequestResult<T>{
+        return  RequestResult.Success( data= server.data)
+    }
+    private fun merge(
+        cache: RequestResult.InProgress<T>,
+        server: RequestResult.Error<T>
+    ):RequestResult<T>{
+        return  RequestResult.Error( data= server.data,error = server.error)
     }
 }

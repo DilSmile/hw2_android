@@ -9,7 +9,7 @@ import com.example.database.dao.ArticleDao
 import com.example.database.utils.Converters
 import com.example.newsapi.models.ArticleDBO
 
-class NewsDatabase(private val database: Context){
+class NewsDatabase internal constructor(private val database:NewsRoomDatabase){
 
     val articlesDao: ArticleDao
         get() = database.articlesDao()

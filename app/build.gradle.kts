@@ -20,8 +20,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        buildConfigField("String","NEWS_API_KEY","\"\"")
-        buildConfigField("String","NEWS_API_BASE_URL","\"\"")
+        buildConfigField("String","NEWS_API_KEY","\"f162627168ec4d76ab4bac3b4e2adfbd\"")
+        buildConfigField("String","NEWS_API_BASE_URL","\"https://newsapi.org/v2/\"")
 
     }
 
@@ -76,6 +76,7 @@ dependencies {
 
     implementation(project(":news-data"))
     implementation(project(":newsapi"))
+    implementation(project(":features:news_main"))
     implementation(project(":database"))
     implementation(project(":news-common"))
 }
