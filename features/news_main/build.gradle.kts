@@ -58,4 +58,5 @@ dependencies {
 
     implementation(project(":news-data"))
     implementation("jakarta.inject:jakarta.inject-api:2.0.1")
+    implementation ("com.android.tools.build:gradle:3.2.1")
 }
