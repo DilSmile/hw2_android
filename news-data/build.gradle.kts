@@ -38,6 +38,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
     implementation(project(":database"))
     implementation(project(":newsapi"))
+    implementation(project(":news-common"))
     implementation("jakarta.inject:jakarta.inject-api:2.0.1")
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$1.5.1")
     implementation ("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
