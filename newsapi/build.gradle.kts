@@ -17,4 +17,5 @@ dependencies {
     implementation("androidx.annotation:annotation:1.8.0-alpha01")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
     implementation ("com.github.skydoves:retrofit-adapters-result:1.0.9")
+    implementation("com.squareup.okhttps3:logging-interceptor:4.12.0")
 }

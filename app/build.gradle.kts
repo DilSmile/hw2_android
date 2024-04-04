@@ -79,6 +79,8 @@ dependencies {
     implementation(project(":features:news_main"))
     implementation(project(":database"))
     implementation(project(":news-common"))
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$1.5.1")
     implementation ("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
 }

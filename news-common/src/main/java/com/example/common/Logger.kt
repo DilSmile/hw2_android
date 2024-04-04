@@ -7,7 +7,7 @@ interface Logger {
 
     fun e(tag:String,message:String)
 }
-fun AndroidLogcarLogger():Logger = object :Logger{
+fun AndroidLogcatLogger():Logger = object :Logger{
     override fun d(tag: String, message: String) {
         Log.d(tag,message)
     }

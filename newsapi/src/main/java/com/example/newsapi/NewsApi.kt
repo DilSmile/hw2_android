@@ -23,7 +23,7 @@ interface NewsApi {
     /* f162627168ec4d76ab4bac3b4e2adfbd key */
 
     /*Api details (https://newsapi.org/docs/endpoints/everything) */
-    @GET("/everything")
+    @GET("everything")
     suspend fun everything(
         @Header("X")
         @Query ("q") query:String?= null,
