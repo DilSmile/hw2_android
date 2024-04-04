@@ -13,7 +13,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -55,9 +54,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
     implementation ("com.google.dagger:dagger:2.x")
     implementation("com.google.dagger:hilt-android:2.44")
-
     implementation(project(":news-data"))
     implementation("jakarta.inject:jakarta.inject-api:2.0.1")
     implementation ("com.android.tools.build:gradle:3.2.1")
-
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$1.5.1")
+    implementation ("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
 }

@@ -9,6 +9,7 @@ import com.example.newsapi.models.ResponseDTO
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flatMapLatest
@@ -27,7 +28,6 @@ class ArticlesRepository @Inject constructor(
          mergeStrategy: MergeStrategy<RequestResult<List<Article>>> = RequestResponseMergeStrategy(),
      ): Flow<RequestResult<List<Article>>> {
        val cachedAllArticles:Flow<RequestResult<List<Article>>> = getAllFromDatabase()
-
        val remoteArticles: Flow<RequestResult<List<Article>>> = getAllFromServer()
 
        return cachedAllArticles.combine(remoteArticles,mergeStrategy::merge)
@@ -68,13 +68,15 @@ class ArticlesRepository @Inject constructor(
     private fun getAllFromDatabase():Flow<RequestResult<List<Article>>> {
         val dbRequest = database.articlesDao::getAll.asFlow()
             .map { RequestResult.Success(it) }
-         val start = flowOf<RequestResult<List<ArticleDBO>>>(RequestResult.InProgress())
-         return merge(start,dbRequest).map{ result ->
-                 result.map{ articleDbos ->
-                     articleDbos.map { it.toArticle() }
-                 }
+            .catch {
+                RequestResult.Error<List<ArticleDBO>>(error = it)
              }
+        val start = flowOf<RequestResult<List<ArticleDBO>>>(RequestResult.InProgress())
+        return merge(start,dbRequest).map { result ->
+            result.map { dbos -> dbos.map { it.toArticle() } }
+        }
     }
+
     suspend fun search(query:String): Flow<Article> {
         api.everything()
         TODO("Not implemented")
