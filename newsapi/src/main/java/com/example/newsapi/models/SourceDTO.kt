@@ -8,7 +8,3 @@ data class SourceDTO (
     @SerialName("id") val id:String?,
     @SerialName("name") val name:String
 )
-data class SourceDBO (
-    @SerialName("id") val id:String,
-    @SerialName("name") val name:String
-)

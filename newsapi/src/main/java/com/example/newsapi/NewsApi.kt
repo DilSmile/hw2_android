@@ -9,8 +9,9 @@ import com.example.newsapi.utils.NewsApiKeyInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.skydoves.retrofit.adapters.result.ResultCallAdapterFactory
 import kotlinx.serialization.json.Json
-import okhttp3.MediaType
 import okhttp3.OkHttpClient
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.create
 import retrofit2.http.GET
@@ -51,7 +52,7 @@ private fun retrofit(
     okHttpClient: OkHttpClient?,
     json: Json = Json,
 ):Retrofit{
-    val jsonConverterFactory = json.asConverterFactory("application/json".toMediaType())
+    val jsonConverterFactory = Json.asConverterFactory("application/json".toMediaType())
 
     val modifiedOkHttpClient = (okHttpClient?.newBuilder() ?: OkHttpClient.Builder())
         .addInterceptor(NewsApiKeyInterceptor(apiKey))
