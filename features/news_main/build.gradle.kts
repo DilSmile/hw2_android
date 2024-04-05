@@ -9,7 +9,6 @@ android {
 
     defaultConfig {
         minSdk = 24
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -53,7 +52,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
     implementation ("com.google.dagger:dagger:2.x")
-    implementation("com.google.dagger:hilt-android:2.44")
+    implementation("com.google.dagger:hilt-android:2.48")
     implementation(project(":news-data"))
     implementation("jakarta.inject:jakarta.inject-api:2.0.1")
     implementation ("com.android.tools.build:gradle:3.2.1")

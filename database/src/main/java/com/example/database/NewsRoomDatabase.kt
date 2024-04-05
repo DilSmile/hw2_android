@@ -9,23 +9,22 @@ import com.example.database.dao.ArticleDao
 import com.example.database.utils.Converters
 import com.example.newsapi.models.ArticleDBO
 
-class NewsDatabase(private val database: NewsRoomDatabase){
-
-    val articlesDao: ArticleDao
+class NewsDatabase internal constructor (private val database: NewsRoomDatabase) {
+    val articlesDao : ArticleDao
         get() = database.articlesDao()
 }
 
 @Database(entities = [ArticleDBO::class], version = 1)
 @TypeConverters(Converters::class)
-abstract class NewsRoomDatabase :RoomDatabase() {
-
+internal abstract class NewsRoomDatabase : RoomDatabase() {
     abstract fun articlesDao(): ArticleDao
-
 }
-fun NewsRoomDatabase(applicationContext:Context):NewsDatabase{
+
+fun NewsDatabase(applicationContext: Context): NewsDatabase {
     val newsRoomDatabase = Room.databaseBuilder(
-        checkNotNull(applicationContext.applicationContext) ,
-        NewsRoomDatabase::class.java, "news"
+        checkNotNull(applicationContext.applicationContext),
+        NewsRoomDatabase::class.java,
+        "news"
     ).build()
-    return NewsDatabase(newsRoomDatabase)
+    return  NewsDatabase(newsRoomDatabase)
 }

@@ -45,7 +45,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
     packaging {
         resources {
@@ -72,15 +72,17 @@ dependencies {
     implementation ("com.google.dagger:dagger:2.x")
     implementation("com.google.dagger:hilt-android:2.44")
     implementation("jakarta.inject:jakarta.inject-api:2.0.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
-
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
     implementation(project(":news-data"))
     implementation(project(":newsapi"))
     implementation(project(":features:news_main"))
     implementation(project(":database"))
     implementation(project(":news-common"))
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
+    implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$1.5.1")
     implementation ("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
 }

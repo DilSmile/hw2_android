@@ -73,11 +73,11 @@ class ArticlesRepository @Inject constructor(
 
     private fun getAllFromDatabase():Flow<RequestResult<List<Article>>> {
         val dbRequest = database.articlesDao::getAll.asFlow()
-            .map { RequestResult.Success(it) }
+            .map<List<ArticleDBO>,RequestResult<List<ArticleDBO>>>{ RequestResult.Success(it) }
             .catch {
-                RequestResult.Error<List<ArticleDBO>>(error = it)
                 logger.e(LOG_TAG,"Error getting from database. Cause = $it")
-             }
+                emit(RequestResult.Error(error = it))
+            }
         val start = flowOf<RequestResult<List<ArticleDBO>>>(RequestResult.InProgress())
         return merge(start,dbRequest).map { result ->
             result.map { dbos -> dbos.map { it.toArticle() } }
