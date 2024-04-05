@@ -49,9 +49,9 @@ private fun retrofit(
     baseUrl: String,
     apiKey: String,
     okHttpClient: OkHttpClient?,
-    json: Json,
+    json: Json = Json,
 ):Retrofit{
-    val jsonConverterFactory = json.asConverterFactory(MediaType.get("application/json"))
+    val jsonConverterFactory = json.asConverterFactory("application/json".toMediaType())
 
     val modifiedOkHttpClient = (okHttpClient?.newBuilder() ?: OkHttpClient.Builder())
         .addInterceptor(NewsApiKeyInterceptor(apiKey))

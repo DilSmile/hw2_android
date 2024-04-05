@@ -21,16 +21,20 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNewsApi():NewsApi{
-        val okHttpClient: OkHttpClient? = if (BuildConfig.DEBUG) {
-          val logging =  HttpLoggingInterceptor()
-              logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
-            OkHttpClient.Builder()
+    fun provideHttpClient(): OkHttpClient? {
+        if(BuildConfig.DEBUG){
+            val logging = HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.BODY)
+            return OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .build()
-        } else {
-            null
         }
+           return null
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsApi(okHttpClient:OkHttpClient?):NewsApi{
         return NewsApi(
             baseUrl = BuildConfig.NEWS_API_BASE_URL,
             apiKey = BuildConfig.NEWS_API_KEY,

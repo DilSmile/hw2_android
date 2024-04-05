@@ -27,10 +27,11 @@ class ArticlesRepository @Inject constructor(
     private val logger: Logger,
 ){
      fun getAll(
+         query:String,
          mergeStrategy: MergeStrategy<RequestResult<List<Article>>> = RequestResponseMergeStrategy(),
      ): Flow<RequestResult<List<Article>>> {
        val cachedAllArticles:Flow<RequestResult<List<Article>>> = getAllFromDatabase()
-       val remoteArticles: Flow<RequestResult<List<Article>>> = getAllFromServer()
+       val remoteArticles: Flow<RequestResult<List<Article>>> = getAllFromServer(query)
 
        return cachedAllArticles.combine(remoteArticles,mergeStrategy::merge)
            .flatMapLatest { result ->
@@ -44,8 +45,8 @@ class ArticlesRepository @Inject constructor(
            }
     }
 
-    private fun getAllFromServer() : Flow<RequestResult<List<Article>>> {
-        val apiRequest = flow {emit(api.everything())
+    private fun getAllFromServer(query: String): Flow<RequestResult<List<Article>>> {
+        val apiRequest = flow {emit(api.everything(query = query))
         }.onEach {result->
            if(result.isSuccess) saveArticlesToCache(result.getOrThrow().articles)
            }
@@ -87,11 +88,6 @@ class ArticlesRepository @Inject constructor(
         const val LOG_TAG = "ArticlesRepository"
     }
 
-    suspend fun search(query:String): Flow<Article> {
-        api.everything()
-        TODO("Not implemented")
-        //delete
-    }
 
 }
 
