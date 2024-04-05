@@ -47,10 +47,10 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.8"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
+    packagingOptions {
+        excludes.add("/META-INF/DEPENDENCIES")
+        excludes.add("/META-INF/LICENSE")
+        excludes.add("/META-INF/NOTICE")
     }
     buildFeatures {
         buildConfig = true
