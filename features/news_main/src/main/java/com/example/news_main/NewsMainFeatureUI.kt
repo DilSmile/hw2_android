@@ -64,8 +64,10 @@ internal fun ArticlesDuringUpdate(
     @PreviewParameter(ArticlesPreviewProvider::class,limit = 1 )articles:List<ArticleUI>?,
 ) {
     Column {
-        Box(Modifier.padding(8.dp)
-            .fillMaxWidth(), contentAlignment = Alignment.Center){
+        Box(
+            Modifier
+                .padding(8.dp)
+                .fillMaxWidth(), contentAlignment = Alignment.Center){
             CircularProgressIndicator()
         }
         if(articles != null){
@@ -102,9 +104,9 @@ internal fun Article(
     @PreviewParameter(ArticlePreviewProvider::class,limit = 1)
     article:ArticleUI){
     Column(modifier=Modifier.padding(8.dp)){
-        Text(text =article.title,style = MaterialTheme.typography.headlineMedium,maxLines=1 )
-        Spacer(modifier=Modifier.size(4.dp))
-        Text(text =article.description,style= MaterialTheme.typography.bodyMedium, maxLines = 3)
+        Text(text =article.title ?: "NO TITLE",style = MaterialTheme.typography.headlineMedium,maxLines=1 )
+            Spacer(modifier = Modifier.size(4.dp))
+            Text(text =article.description,style= MaterialTheme.typography.bodyMedium, maxLines = 3)
     }
 }
 
