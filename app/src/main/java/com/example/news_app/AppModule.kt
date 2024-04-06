@@ -13,24 +13,11 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import jakarta.inject.Singleton
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
-    @Provides
-    @Singleton
-    fun provideHttpClient(): OkHttpClient? {
-        if(BuildConfig.DEBUG){
-            val logging = HttpLoggingInterceptor()
-                .setLevel(HttpLoggingInterceptor.Level.BODY)
-            return OkHttpClient.Builder()
-                .addInterceptor(logging)
-                .build()
-        }
-           return null
-    }
 
     @Provides
     @Singleton
