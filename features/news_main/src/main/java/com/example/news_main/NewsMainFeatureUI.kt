@@ -32,56 +32,33 @@ fun NewsMainScreen(){
 @Composable
 internal fun NewsMainScreen(viewModel: NewsMainViewModel){
     val state by viewModel.state.collectAsState()
-    when(val currentState = state){
-        is State.Success -> Articles(currentState.articles)
-        is State.Error -> ArticlesWithError(currentState.articles)
-        is State.Loading -> ArticlesDuringUpdate(currentState.articles)
-        State.None -> NewsEmpty()
-    }
-}
-
-@Composable
-internal fun ArticlesWithError(articles: List<ArticleUI>?) {
-    Column {
-        Box(
-            Modifier
-                .padding(8.dp)
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.error),
-             contentAlignment = Alignment.Center
-        ){
-            Text(text = "Error during update",color=MaterialTheme.colorScheme.onError)
-        }
-        if(articles != null){
-            Articles(articles = articles)
-        }
-    }
-}
-
-@Composable
-@Preview
-internal fun ArticlesDuringUpdate(
-    @PreviewParameter(ArticlesPreviewProvider::class,limit = 1 )articles:List<ArticleUI>?,
-) {
-    Column {
-        Box(
-            Modifier
-                .padding(8.dp)
-                .fillMaxWidth(), contentAlignment = Alignment.Center){
-            CircularProgressIndicator()
-        }
-        if(articles != null){
-            Articles(articles = articles)
+    val currentState = state
+    if(state !is State.None){
+        Column {
+            if (currentState is State.Error){
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.error)
+                        .padding(8.dp),
+                    contentAlignment = Alignment.Center
+                ){
+                    Text(text = "Error during update",color=MaterialTheme.colorScheme.onError)
+                }
+            }
+            if (currentState is State.Loading){
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp) , contentAlignment = Alignment.Center,
+                ){ CircularProgressIndicator()
+                }
+            }
+            if(currentState.articles != null){
+                Articles(articles = currentState.articles)
+            }
         }
     }
-}
-
-
-@Composable
-internal fun NewsEmpty() {
-   Box(contentAlignment = Alignment.Center){
-       Text("No news")
-   }
 }
 
 @Preview
