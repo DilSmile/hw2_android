@@ -60,4 +60,6 @@ dependencies {
     implementation ("com.android.tools.build:gradle:3.2.1")
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$1.5.1")
     implementation ("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
+    implementation("io.coil-kt:coil:2.6.0")
+    implementation("io.coil-kt:coil-compose:2.6.0")
 }
