@@ -5,11 +5,10 @@ import com.example.news_data.model.Source
 import com.example.newsapi.models.Source as SourceDBO
 import com.example.newsapi.models.ArticleDBO
 import com.example.newsapi.models.ArticleDTO
-import com.example.newsapi.models.SourceDTO
 
-internal fun ArticleDBO.toArticle():Article{
+internal fun ArticleDBO.toArticle(): Article {
     return Article(
-        casheId = id,
+        cacheId = id,
         source = Source(id = source.id, name = source.name),
         author = author,
         title = title,
@@ -17,18 +16,14 @@ internal fun ArticleDBO.toArticle():Article{
         url = url,
         urlToImage = urlToImage,
         publishedAt = publishedAt,
-        content = content,
+        content = content
     )
-}
-
-internal fun SourceDTO.toSource(): Source {
-    return Source(id = id ?: name, name = name )
 }
 
 internal fun ArticleDTO.toArticle(): Article {
     return Article(
-        source = source.toSource(),
-        author = author,
+        source = Source(id = source.id, name = source.name),
+        author = author ?: "",
         title = title,
         description = description,
         url = url,
@@ -37,15 +32,17 @@ internal fun ArticleDTO.toArticle(): Article {
         content = content
     )
 }
-internal fun ArticleDTO.toArticleDbo(): ArticleDBO {
+
+internal fun ArticleDTO.toArticleDbo(): ArticleDBO{
     return ArticleDBO(
         source = SourceDBO(id = source.id, name = source.name),
-        author = author,
+        author = author ?: "",
         title = title,
         description = description,
         url = url,
         urlToImage = urlToImage,
         publishedAt = publishedAt,
-        content = content
+        content = content,
+        id = 0
     )
 }

@@ -16,10 +16,10 @@ data class ArticleDBO(
     @ColumnInfo("urlToImage") val urlToImage:String?,
     @ColumnInfo("publishedAt") val publishedAt: Date,
     @ColumnInfo("content") val content:String,
-    @PrimaryKey (autoGenerate = true) val id:Long = 0,
+    @PrimaryKey (autoGenerate = true) val id:Long ,
 
     )
 data class Source(
     val id: String?,
-    val name:String
+    val name:String?
 )

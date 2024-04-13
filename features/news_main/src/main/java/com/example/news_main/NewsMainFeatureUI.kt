@@ -25,9 +25,10 @@ import androidx.compose.ui.unit.dp
 import com.example.news.uikit.NewsTheme
 
 @Composable
-fun NewsMainScreen(){
+fun NewsMainScreen( ){
     NewsMainScreen(viewModel = viewModel())
 }
+
 
 @Composable
 internal fun NewsMainScreen(viewModel: NewsMainViewModel){
@@ -93,6 +94,10 @@ private fun Articles(
     }
 }
 
+
+
+
+
 @Preview
 @Composable
 internal fun Article(
@@ -107,6 +112,10 @@ internal fun Article(
         Text(text = article.description, style = NewsTheme.typography.bodyMedium, maxLines = 3)
     }
 }
+
+
+
+
 private class ArticlePreviewProvider: PreviewParameterProvider<ArticleUI>{
     override val values = sequenceOf(
         ArticleUI(1,"Android Studio Iguana is Stable!",
@@ -127,7 +136,9 @@ private class ArticlePreviewProvider: PreviewParameterProvider<ArticleUI>{
             url = "",
         ),
     )
+
 }
+
 private class ArticlesPreviewProvider: PreviewParameterProvider<List<ArticleUI>>{
 
     private val articleProvider = ArticlePreviewProvider()
