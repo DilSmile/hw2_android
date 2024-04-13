@@ -13,16 +13,14 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version("1.23.3") apply false
 }
 
-allprojects.onEach {project ->
-    with(project.plugins){
-        if (hasPlugin("org.jetbrains.kotlin.android".get().pluginId)
-            ||hasPlugin("org.jetbrains.kotlin.android".get().pluginId)
-        ){
-            apply("io.gitlab.arturbosch.detekt".get().pluginId)
-            project.extensions.configure<DetektExtension>{
-                config = rootProject.files("default-detekt-config.yml")
-            }
-            project.dependencies.add("detektPlugins","io.gitlab.arturbosch.detekt:detekt-formatting".get().toString())
+allprojects {
+    plugins.withId("org.jetbrains.kotlin.android") {
+        apply<io.gitlab.arturbosch.detekt.DetektPlugin>()
+        extensions.configure<DetektExtension> {
+            config = rootProject.files("default-detekt-config.yml")
+        }
+        dependencies {
+            add("detektPlugins", "io.gitlab.arturbosch.detekt:detekt-formatting:1.23.3")
         }
     }
 }
