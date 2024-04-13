@@ -12,5 +12,5 @@ enum class SortBy {
     POPULARITY,
 
     @SerialName("publishedAt")
-    PUBLISHED_AT,
+    PUBLISHED_AT
 }

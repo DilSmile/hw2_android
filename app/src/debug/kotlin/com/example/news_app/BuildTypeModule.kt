@@ -14,8 +14,9 @@ class BuildTypeModule {
     @Provides
     @Singleton
     fun provideHttpClient(): OkHttpClient? {
-        val logging = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+        val logging =
+            HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder()
             .addInterceptor(logging)
             .build()

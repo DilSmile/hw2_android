@@ -20,17 +20,18 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 
-
 @Suppress("UNREACHABLE_CODE")
-class ArticleRepository @Inject constructor(
+class ArticleRepository
+@Inject
+constructor(
     private val database: NewsDatabase,
     private val api: NewsApi,
-    private val logger: Logger,
+    private val logger: Logger
 ) {
     @SuppressLint("SuspiciousIndentation")
     fun getAll(
         query: String,
-        mergeStrategy: MergeStrategy<RequestResult<List<Article>>> = RequestResponseMergeStrategy(),
+        mergeStrategy: MergeStrategy<RequestResult<List<Article>>> = RequestResponseMergeStrategy()
     ): Flow<RequestResult<List<Article>>> {
         val cachedAllArticles: Flow<RequestResult<List<Article>>> = getAllFromDatabase()
         val remoteArticles: Flow<RequestResult<List<Article>>> = getAllFromServer(query)
@@ -45,23 +46,23 @@ class ArticleRepository @Inject constructor(
                     flowOf(result)
                 }
             }
-
     }
 
     private fun getAllFromServer(query: String): Flow<RequestResult<List<Article>>> {
-        val apiRequest = flow { emit(api.everything(query)) }
-            .onEach { result ->
-                if (result.isSuccess) saveNetResponseToCache(result.getOrThrow().articles)
-            }
-            .onEach { result ->
-                if (result.isFailure) {
-                    logger.e(
-                        LOG_TAG,
-                        "ERROR getting data from server. Reason = ${result.exceptionOrNull()}"
-                    )
+        val apiRequest =
+            flow { emit(api.everything(query)) }
+                .onEach { result ->
+                    if (result.isSuccess) saveArticlesToCache(result.getOrThrow().articles)
                 }
-            }
-            .map { it.toRequestResult() }
+                .onEach { result ->
+                    if (result.isFailure) {
+                        logger.e(
+                            LOG_TAG,
+                            "ERROR getting data from server. Reason = ${result.exceptionOrNull()}"
+                        )
+                    }
+                }
+                .map { it.toRequestResult() }
 
         val start = flowOf<RequestResult<ResponseDTO<ArticleDTO>>>(RequestResult.InProgress())
         return merge(apiRequest, start)
@@ -72,20 +73,19 @@ class ArticleRepository @Inject constructor(
             }
     }
 
-    private suspend fun saveNetResponseToCache(data: List<ArticleDTO>) {
+    private suspend fun saveArticlesToCache(data: List<ArticleDTO>) {
         val dbos = data.map { articleDto -> articleDto.toArticleDbo() }
         database.articlesDao.insert(dbos)
     }
 
     private fun getAllFromDatabase(): Flow<RequestResult<List<Article>>> {
-        val dbRequest = database.articlesDao::getAll.asFlow()
-            .map<List<ArticleDBO>, RequestResult<List<ArticleDBO>>> { RequestResult.Success(it) }
-
-            .catch {
-                logger.e(LOG_TAG, "Error getting from database. Reason: $it")
-                emit(RequestResult.Error<List<ArticleDBO>>(error(it)))
-            }
-
+        val dbRequest =
+            database.articlesDao::getAll.asFlow()
+                .map<List<ArticleDBO>, RequestResult<List<ArticleDBO>>> { RequestResult.Success(it) }
+                .catch {
+                    logger.e(LOG_TAG, "Error getting from database. Reason: $it")
+                    emit(RequestResult.Error<List<ArticleDBO>>(error(it)))
+                }
 
         val start = flowOf<RequestResult<List<ArticleDBO>>>(RequestResult.InProgress())
         return merge(start, dbRequest).map { result ->
@@ -93,18 +93,10 @@ class ArticleRepository @Inject constructor(
                 articleDbos.map { it.toArticle() }
             }
         }
-
     }
 
     private companion object {
         const val LOG_TAG = "ArticlesRepository"
     }
 
-
-    suspend fun search(query: String): Flow<Article> {
-        api.everything()
-        TODO("Not implemented")
-    }
-
 }
-

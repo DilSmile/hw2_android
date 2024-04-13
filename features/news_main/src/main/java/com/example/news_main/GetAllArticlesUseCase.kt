@@ -8,10 +8,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import com.example.news_data.model.Article as DataArticle
 
-internal class GetAllArticlesUseCase @Inject constructor(
-    private val repository: ArticleRepository,
+internal class GetAllArticlesUseCase
+@Inject
+constructor(
+    private val repository: ArticleRepository
 ) {
-
     operator fun invoke(query: String): Flow<RequestResult<List<ArticleUI>>> {
         return repository.getAll(query)
             .map { requestResult ->

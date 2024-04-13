@@ -21,7 +21,6 @@ android {
     }
 }
 
-
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     ksp("androidx.room:room-compiler:2.6.1")

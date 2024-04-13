@@ -69,8 +69,8 @@ private fun ErrorMessage(state: State.Error) {
         Modifier
             .fillMaxWidth()
             .background(NewsTheme.colorScheme.error)
-            .padding(8.dp), contentAlignment = Alignment.Center
-
+            .padding(8.dp),
+        contentAlignment = Alignment.Center
     ) {
         Text(text = "Error during update", color = NewsTheme.colorScheme.onError)
     }
@@ -83,7 +83,7 @@ private fun ProgressIndicator(state: State.Loading) {
         Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        contentAlignment = Alignment.Center,
+        contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator()
     }
@@ -92,9 +92,9 @@ private fun ProgressIndicator(state: State.Loading) {
 @Preview
 @Composable
 private fun Articles(
-    @PreviewParameter(ArticlesPreviewProvider::class, limit = 1) articles: List<ArticleUI>,
+    @PreviewParameter(ArticlesPreviewProvider::class, limit = 1) articles: List<ArticleUI>
 ) {
-    LazyColumn() {
+    LazyColumn {
         items(articles) { article ->
             key(article.id) {
                 Article(article = article)
@@ -106,7 +106,7 @@ private fun Articles(
 @Preview
 @Composable
 internal fun Article(
-    @PreviewParameter(ArticlePreviewProvider::class, limit = 1) article: ArticleUI,
+    @PreviewParameter(ArticlePreviewProvider::class, limit = 1) article: ArticleUI
 ) {
     Row(Modifier.padding(bottom = 4.dp)) {
         article.imageUrl?.let { imageUrl ->
@@ -139,35 +139,37 @@ internal fun Article(
 
 @Suppress("MagicNumber")
 private class ArticlePreviewProvider : PreviewParameterProvider<ArticleUI> {
-    override val values = sequenceOf(
-        ArticleUI(
-            1, "Android Studio Iguana is Stable!",
-            "New stable version on Android IDE has been realized",
-            imageUrl = null,
-            url = "",
-        ),
-
-        ArticleUI(
-            2, "Gemini 1.5 Release!",
-            "Upgraded version of Google AI is available",
-            imageUrl = null,
-            url = "",
-        ),
-
-        ArticleUI(
-            3, "Shape animations (10 min)",
-            "How to use shape transform animations in Compose",
-            imageUrl = null,
-            url = "",
-        ),
-    )
+    override val values =
+        sequenceOf(
+            ArticleUI(
+                1,
+                "Android Studio Iguana is Stable!",
+                "New stable version on Android IDE has been realized",
+                imageUrl = null,
+                url = ""
+            ),
+            ArticleUI(
+                2,
+                "Gemini 1.5 Release!",
+                "Upgraded version of Google AI is available",
+                imageUrl = null,
+                url = ""
+            ),
+            ArticleUI(
+                3,
+                "Shape animations (10 min)",
+                "How to use shape transform animations in Compose",
+                imageUrl = null,
+                url = ""
+            )
+        )
 }
 
 private class ArticlesPreviewProvider : PreviewParameterProvider<List<ArticleUI>> {
-
     private val articleProvider = ArticlePreviewProvider()
 
-    override val values = sequenceOf(
-        articleProvider.values.toList()
-    )
+    override val values =
+        sequenceOf(
+            articleProvider.values.toList()
+        )
 }

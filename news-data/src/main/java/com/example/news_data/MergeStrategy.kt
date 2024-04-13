@@ -1,17 +1,25 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package com.example.news_data
 
 interface MergeStrategy<E> {
-
-    fun merge(right: E, left: E): E
+    fun merge(
+        right: E,
+        left: E
+    ): E
 }
 
 internal class RequestResponseMergeStrategy<T : Any> : MergeStrategy<RequestResult<T>> {
-    override fun merge(right: RequestResult<T>, left: RequestResult<T>): RequestResult<T> {
+    override fun merge(
+        right: RequestResult<T>,
+        left: RequestResult<T>
+    ): RequestResult<T> {
         return when {
-            right is RequestResult.InProgress && left is RequestResult.InProgress -> merge(
-                right,
-                left
-            )
+            right is RequestResult.InProgress && left is RequestResult.InProgress ->
+                merge(
+                    right,
+                    left
+                )
 
             right is RequestResult.Success && left is RequestResult.InProgress -> merge(right, left)
             right is RequestResult.InProgress && left is RequestResult.Success -> merge(right, left)
@@ -20,7 +28,6 @@ internal class RequestResponseMergeStrategy<T : Any> : MergeStrategy<RequestResu
             right is RequestResult.Error && left is RequestResult.InProgress -> merge(right, left)
             right is RequestResult.Error && left is RequestResult.Success -> merge(right, left)
             right is RequestResult.Success && left is RequestResult.Success -> merge(right, left)
-
 
             else -> error("Unimplemented branch right = $right & left = $left ")
         }
@@ -43,14 +50,12 @@ internal class RequestResponseMergeStrategy<T : Any> : MergeStrategy<RequestResu
         return RequestResult.InProgress(cache.data)
     }
 
-
     private fun merge(
         cache: RequestResult.InProgress<T>,
         server: RequestResult.Success<T>
     ): RequestResult<T> {
         return RequestResult.InProgress(server.data)
     }
-
 
     private fun merge(
         cache: RequestResult.Success<T>,
@@ -86,5 +91,4 @@ internal class RequestResponseMergeStrategy<T : Any> : MergeStrategy<RequestResu
     ): RequestResult<T> {
         return server
     }
-
 }

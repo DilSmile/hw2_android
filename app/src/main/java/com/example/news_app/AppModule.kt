@@ -17,7 +17,6 @@ import okhttp3.OkHttpClient
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Provides
     @Singleton
     fun provideNewsApi(okHttpClient: OkHttpClient?): NewsApi {
@@ -30,7 +29,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNewsDatabase(@ApplicationContext context: Context): NewsDatabase {
+    fun provideNewsDatabase(
+        @ApplicationContext context: Context
+    ): NewsDatabase {
         return NewsDatabase(context)
     }
 
