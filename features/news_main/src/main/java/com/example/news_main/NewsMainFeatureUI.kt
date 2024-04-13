@@ -102,6 +102,7 @@ private fun Articles(
         }
     }
 }
+
 @Preview
 @Composable
 internal fun Article(
@@ -135,11 +136,12 @@ internal fun Article(
         }
     }
 }
+
 @Suppress("MagicNumber")
 private class ArticlePreviewProvider : PreviewParameterProvider<ArticleUI> {
     override val values = sequenceOf(
         ArticleUI(
-            1,  "Android Studio Iguana is Stable!",
+            1, "Android Studio Iguana is Stable!",
             "New stable version on Android IDE has been realized",
             imageUrl = null,
             url = "",
@@ -159,7 +161,6 @@ private class ArticlePreviewProvider : PreviewParameterProvider<ArticleUI> {
             url = "",
         ),
     )
-
 }
 
 private class ArticlesPreviewProvider : PreviewParameterProvider<List<ArticleUI>> {
