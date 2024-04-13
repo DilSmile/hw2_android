@@ -17,6 +17,7 @@ ij_wrap_on_typing = false
 
 [{*.kt,*.kts}]
 insert_final_newline = true
+parameter-list-wrapping = true
 ktlint_code_style = ktlint_official
 ktlint_ignore_back_ticked_identifier = true
 
@@ -31,7 +32,7 @@ ij_kotlin_align_multiline_binary_operation = false
 ij_kotlin_align_multiline_extends_list = false
 ij_kotlin_align_multiline_method_parentheses = false
 ij_kotlin_align_multiline_parameters = true
-ij_kotlin_align_multiline_parameters_in_calls = false
+ij_kotlin_align_multiline_parameters_in_calls = true
 ij_kotlin_allow_trailing_comma = false
 ij_kotlin_allow_trailing_comma_on_call_site = false
 ij_kotlin_assignment_wrap = normal

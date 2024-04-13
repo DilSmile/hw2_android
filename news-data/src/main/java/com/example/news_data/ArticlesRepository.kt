@@ -98,5 +98,4 @@ constructor(
     private companion object {
         const val LOG_TAG = "ArticlesRepository"
     }
-
 }
