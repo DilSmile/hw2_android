@@ -2,9 +2,9 @@ package com.example.news_data
 
 import com.example.news_data.model.Article
 import com.example.news_data.model.Source
-import com.example.newsapi.models.Source as SourceDBO
 import com.example.newsapi.models.ArticleDBO
 import com.example.newsapi.models.ArticleDTO
+import com.example.newsapi.models.Source as SourceDBO
 
 internal fun ArticleDBO.toArticle(): Article {
     return Article(
@@ -33,7 +33,7 @@ internal fun ArticleDTO.toArticle(): Article {
     )
 }
 
-internal fun ArticleDTO.toArticleDbo(): ArticleDBO{
+internal fun ArticleDTO.toArticleDbo(): ArticleDBO {
     return ArticleDBO(
         source = SourceDBO(id = source.id, name = source.name),
         author = author ?: "",

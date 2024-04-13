@@ -14,7 +14,6 @@ import dagger.hilt.components.SingletonComponent
 import jakarta.inject.Singleton
 import okhttp3.OkHttpClient
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
@@ -28,14 +27,16 @@ object AppModule {
             okHttpClient = okHttpClient
         )
     }
+
     @Provides
     @Singleton
-    fun provideNewsDatabase(@ApplicationContext context: Context):NewsDatabase{
+    fun provideNewsDatabase(@ApplicationContext context: Context): NewsDatabase {
         return NewsDatabase(context)
     }
+
     @Provides
     @Singleton
-    fun provideAppCoroutineDisapatchers():AppDispatchers = AppDispatchers()
+    fun provideAppCoroutineDisapatchers(): AppDispatchers = AppDispatchers()
 
     @Provides
     @Singleton

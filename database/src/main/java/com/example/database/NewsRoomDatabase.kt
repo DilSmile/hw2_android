@@ -9,8 +9,8 @@ import com.example.database.dao.ArticleDao
 import com.example.database.utils.Converters
 import com.example.newsapi.models.ArticleDBO
 
-class NewsDatabase internal constructor (private val database: NewsRoomDatabase) {
-    val articlesDao : ArticleDao
+class NewsDatabase internal constructor(private val database: NewsRoomDatabase) {
+    val articlesDao: ArticleDao
         get() = database.articlesDao()
 }
 
@@ -26,5 +26,5 @@ fun NewsDatabase(applicationContext: Context): NewsDatabase {
         NewsRoomDatabase::class.java,
         "news"
     ).build()
-    return  NewsDatabase(newsRoomDatabase)
+    return NewsDatabase(newsRoomDatabase)
 }

@@ -20,8 +20,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        buildConfigField("String","NEWS_API_KEY","\"f162627168ec4d76ab4bac3b4e2adfbd\"")
-        buildConfigField("String","NEWS_API_BASE_URL","\"https://newsapi.org/v2/\"")
+        buildConfigField("String", "NEWS_API_KEY", "\"f162627168ec4d76ab4bac3b4e2adfbd\"")
+        buildConfigField("String", "NEWS_API_BASE_URL", "\"https://newsapi.org/v2/\"")
 
     }
 
@@ -62,7 +62,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.1")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    implementation ("com.google.dagger:dagger:2.x")
+    implementation("com.google.dagger:dagger:2.x")
     implementation("com.google.dagger:hilt-android:2.44")
     implementation("jakarta.inject:jakarta.inject-api:2.0.1")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
@@ -77,6 +77,6 @@ dependencies {
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
     implementation("com.squareup.okhttp3:okhttp")
     debugImplementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$1.5.1")
-    implementation ("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$1.5.1")
+    implementation("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
 }

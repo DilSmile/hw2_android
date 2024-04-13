@@ -10,7 +10,7 @@ import com.example.news_data.model.Article as DataArticle
 
 internal class GetAllArticlesUseCase @Inject constructor(
     private val repository: ArticleRepository,
-    ) {
+) {
 
     operator fun invoke(query: String): Flow<RequestResult<List<ArticleUI>>> {
         return repository.getAll(query)
@@ -20,7 +20,7 @@ internal class GetAllArticlesUseCase @Inject constructor(
     }
 }
 
-private fun DataArticle.toUiArticle() : ArticleUI{
+private fun DataArticle.toUiArticle(): ArticleUI {
     return ArticleUI(
         id = cacheId,
         title = title,
