@@ -8,7 +8,7 @@ import com.example.newsapi.NewsApi
 import com.example.newsapi.models.ArticleDBO
 import com.example.newsapi.models.ArticleDTO
 import com.example.newsapi.models.ResponseDTO
-import jakarta.inject.Inject
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.catch
